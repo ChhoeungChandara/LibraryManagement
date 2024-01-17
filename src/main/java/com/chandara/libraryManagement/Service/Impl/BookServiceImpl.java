@@ -1,5 +1,7 @@
 package com.chandara.libraryManagement.Service.Impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.chandara.libraryManagement.Entity.Book;
@@ -61,6 +63,19 @@ public class BookServiceImpl implements BookService {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Book> getAll() {
+		return bookRepository.findAll();
+	}
+
+	@Override
+	public List<Book> findBookByTitle(String title) {
+		return bookRepository.findBookByTitle(title);
+	}
+
+
+	
 
 
 }

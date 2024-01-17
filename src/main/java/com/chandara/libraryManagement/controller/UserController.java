@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chandara.libraryManagement.Entity.User;
@@ -41,5 +42,14 @@ public class UserController {
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		       userService.delete(id);
 		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("filter")
+	public ResponseEntity<?> getUserByName(@RequestParam("name") String name){
+		return ResponseEntity.ok(userService.findUserByname(name));
+	}
+	@GetMapping
+	public ResponseEntity<?> getAll(){
+		return ResponseEntity.ok(userService.getAll());
 	}
 }

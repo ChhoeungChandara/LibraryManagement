@@ -1,5 +1,7 @@
 package com.chandara.libraryManagement.Service.Impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.chandara.libraryManagement.Entity.User;
@@ -36,6 +38,16 @@ public class UserServiceImpl implements UserService{
 	public void delete(Long id) {
 		User userId = getUserId(id);
 		userRepository.delete(userId);
+	}
+
+	@Override
+	public List<User> findUserByname(String name) {
+		return userRepository.findUserByName(name);
+	}
+
+	@Override
+	public List<User> getAll() {
+		return userRepository.findAll();
 	}
 
 }
