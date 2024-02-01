@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chandara.libraryManagement.Entity.User;
 import com.chandara.libraryManagement.Service.UserService;
+import com.chandara.libraryManagement.dto.UserDTO;
+import com.chandara.libraryManagement.mapper.UserMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,12 +26,15 @@ public class UserController {
 	private final UserService userService;
 	
 	@PostMapping
-	public ResponseEntity<?> saveUser(@RequestBody User user){
-		return ResponseEntity.ok(userService.create(user));
+	public ResponseEntity<?> saveUser(@RequestBody UserDTO dto){
+		User user = UserMapper.INSTANCE.toUser(dto);
+		user = userService.create(user);
+		return ResponseEntity.ok(UserMapper.INSTANCE.toUser(dto));
 	}
 	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getUserById(@PathVariable Long id){
+		
 		return ResponseEntity.ok(userService.getUserId(id));
 	}
 	
